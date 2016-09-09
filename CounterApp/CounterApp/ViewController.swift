@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet var lblScore: UILabel!
-    var count=0
+    var count = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +25,13 @@ class ViewController: UIViewController {
     
     
     @IBAction func buttonPressed() {
-        count++
-        lblScore.text=String(count)
+        count += 1
+        lblScore.text = String(count)
     }
     
     @IBAction func zerujPressed(){
-        count=0
-        lblScore.text=String(count)
+        count = 0
+        lblScore.text = String(count)
     }
 
 
