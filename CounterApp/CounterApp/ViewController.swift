@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet var lblScore: UILabel!
     var counter = 0
     
+    @IBOutlet var lblShow: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -27,12 +28,16 @@ class ViewController: UIViewController {
     @IBAction func buttonPressed() {
         counter += 1
         lblScore.text = String(counter)
+        
     }
     
     @IBAction func zerujPressed(){
         counter = 0
         lblScore.text = String(counter)
+        
     }
+
+    
 
 
 }
