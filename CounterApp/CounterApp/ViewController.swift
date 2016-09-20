@@ -11,12 +11,15 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet var lblScore: UILabel!
+    let CounterKey = "counter_key"
     var counter = 0
     
     @IBOutlet var lblShow: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        counter = NSUserDefaults.standardUserDefaults().integerForKey(CounterKey)
+        lblScore.text = String(counter)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,6 +30,7 @@ class ViewController: UIViewController {
     
     @IBAction func buttonPressed() {
         counter += 1
+        NSUserDefaults.standardUserDefaults().setInteger(counter, forKey: CounterKey)
         lblScore.text = String(counter)
         
     }
