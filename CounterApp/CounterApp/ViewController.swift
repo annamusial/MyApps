@@ -21,6 +21,7 @@ class ViewController: UIViewController {
         lblScore.text = String(counter)
         
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -41,8 +42,9 @@ class ViewController: UIViewController {
         
     }
 
-    
-
 
 }
+
+
+
 
