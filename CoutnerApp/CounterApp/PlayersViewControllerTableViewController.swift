@@ -13,7 +13,6 @@ class PlayersViewControllerTableViewController: UITableViewController,UIImagePic
 UINavigationControllerDelegate {
     
     var players:[Player] = playersData
-    var isActive: Bool? = false
     var lastSelectedIndex: NSIndexPath?
     let imagePicker = UIImagePickerController()
     
@@ -32,6 +31,11 @@ UINavigationControllerDelegate {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return players.count
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -72,9 +76,11 @@ UINavigationControllerDelegate {
         }
         
         let setActive = UIAlertAction(title:"Set as Active", style: .Default){(_) in
-                let selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
-                selectedCell.contentView.backgroundColor = UIColor.greenColor()
-                self.isActive=true
+            let selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+            selectedCell.contentView.backgroundColor = UIColor.greenColor()
+            let controller = self.navigationController?.tabBarController?.viewControllers?[0] as? ViewController
+            controller?.counter = 0
+            controller?.player = self.players[indexPath.row]
         }
         
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) == true {
@@ -89,7 +95,7 @@ UINavigationControllerDelegate {
     
     
     func imagePickerController(picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [String : AnyObject]){
-         print("Picked an image!")
+        print("Picked an image!")
         
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         players[lastSelectedIndex!.row].myImageView = chosenImage
