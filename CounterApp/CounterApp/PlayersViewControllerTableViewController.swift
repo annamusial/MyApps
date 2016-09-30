@@ -60,13 +60,18 @@ UINavigationControllerDelegate {
             self.imagePicker.allowsEditing = true
             self.imagePicker.sourceType = .Camera
             self.presentViewController(self.imagePicker, animated: true, completion: nil)
+            
         }
       
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in
-        self.dismissViewControllerAnimated(true, completion: nil)}
+        }
         
-        alertController.addAction(takePhoto)
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) == true {
+            alertController.addAction(takePhoto)} else {
+            print ("I don't have a camera.")
+        }
         alertController.addAction(cancelAction)
+        
         
         self.presentViewController(alertController, animated: true, completion: nil)
     }
@@ -74,11 +79,12 @@ UINavigationControllerDelegate {
     func imagePickerController(
         picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [String : AnyObject])
+       
     {
         
     }
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
 }
