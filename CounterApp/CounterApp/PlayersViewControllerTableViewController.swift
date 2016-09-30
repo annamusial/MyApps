@@ -7,13 +7,20 @@
 //
 
 import UIKit
+import MobileCoreServices
 
-class PlayersViewControllerTableViewController: UITableViewController {
-var players:[Player] = playersData
+class PlayersViewControllerTableViewController: UITableViewController,UIImagePickerControllerDelegate,
+UINavigationControllerDelegate {
     
+    var players:[Player] = playersData
+    
+    @IBOutlet weak var myImageView: UIImageView!
+    let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        imagePicker.delegate = self
+       
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,11 +38,11 @@ var players:[Player] = playersData
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("PlayerCell", forIndexPath: indexPath) //1
+        let cell = tableView.dequeueReusableCellWithIdentifier("PlayerCell", forIndexPath: indexPath) as! PlayerCell
         
-        let player = players[indexPath.row] as Player //2
+        let player = players[indexPath.row] as Player
         
-        if let nameLabel = cell.viewWithTag(100) as? UILabel { //3
+        if let nameLabel = cell.viewWithTag(100) as? UILabel {
             nameLabel.text = player.name
         }
         if let companyLabel = cell.viewWithTag(101) as? UILabel {
@@ -47,15 +54,31 @@ var players:[Player] = playersData
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         NSLog("You selected cell #\(indexPath.row)!")
         
-        let alertController = UIAlertController(title: "Take a photo", message: "", preferredStyle: .Alert)
-        let photoAction = UIAlertAction(title: "Camera", style: .Default) { (_) in }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
+        let alertController = UIAlertController(title: "What do you want to do?", message: "", preferredStyle: .Alert)
         
-        alertController.addAction(photoAction)
+        let takePhoto = UIAlertAction(title: "Take photo", style: .Default){ (_) in
+            self.imagePicker.allowsEditing = true
+            self.imagePicker.sourceType = .Camera
+            self.presentViewController(self.imagePicker, animated: true, completion: nil)
+        }
+      
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in
+        self.dismissViewControllerAnimated(true, completion: nil)}
+        
+        alertController.addAction(takePhoto)
         alertController.addAction(cancelAction)
+        
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-
+    func imagePickerController(
+        picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [String : AnyObject])
+    {
+        
+    }
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        
+    }
     
 }
