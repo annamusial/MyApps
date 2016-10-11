@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet var lblScore: UILabel!
     let CounterKey = "counter_key"
     var counter = 0
+    var player: Player?
     
     @IBOutlet var lblShow: UILabel!
     
@@ -20,7 +21,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         counter = UserDefaults.standard.integer(forKey: CounterKey)
         lblScore.text = String(counter)
-        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tabBarController!.delegate = self
     }
     
 
@@ -32,7 +37,12 @@ class ViewController: UIViewController {
     
     @IBAction func buttonPressed() {
         counter += 1
+<<<<<<< HEAD
         UserDefaults.standard.set(counter, forKey: CounterKey)
+=======
+        player?.score = counter
+        NSUserDefaults.standardUserDefaults().setInteger(counter, forKey: CounterKey)
+>>>>>>> 38967a2713322032af9d7814fadd0769b6974630
         lblScore.text = String(counter)
     }
     
@@ -43,6 +53,18 @@ class ViewController: UIViewController {
     }
 
 
+}
+
+extension ViewController: UITabBarControllerDelegate {
+    
+    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+        print("SELECTED STH!")
+        if let controller = viewController as? ViewController {
+            controller.lblScore.text = String(controller.player?.score ?? 0)
+        } else if let controller = viewController as? PlayersViewControllerTableViewController {
+            controller.tableView?.reloadData()
+        }
+    }
 }
 
 

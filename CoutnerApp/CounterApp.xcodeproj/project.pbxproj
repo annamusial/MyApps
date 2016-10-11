@@ -355,7 +355,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.CounterApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+<<<<<<< HEAD
 				SWIFT_VERSION = 3.0;
+=======
+				SWIFT_VERSION = 2.3;
+>>>>>>> 38967a2713322032af9d7814fadd0769b6974630
 			};
 			name = Debug;
 		};
@@ -370,7 +374,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.CounterApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+<<<<<<< HEAD
 				SWIFT_VERSION = 3.0;
+=======
+				SWIFT_VERSION = 2.3;
+>>>>>>> 38967a2713322032af9d7814fadd0769b6974630
 			};
 			name = Release;
 		};
@@ -382,7 +390,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.CounterAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+<<<<<<< HEAD
 				SWIFT_VERSION = 3.0;
+=======
+				SWIFT_VERSION = 2.3;
+>>>>>>> 38967a2713322032af9d7814fadd0769b6974630
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CounterApp.app/CounterApp";
 			};
 			name = Debug;
@@ -395,7 +407,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.CounterAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+<<<<<<< HEAD
 				SWIFT_VERSION = 3.0;
+=======
+				SWIFT_VERSION = 2.3;
+>>>>>>> 38967a2713322032af9d7814fadd0769b6974630
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CounterApp.app/CounterApp";
 			};
 			name = Release;

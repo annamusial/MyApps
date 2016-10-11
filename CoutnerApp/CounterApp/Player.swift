@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Player {
+class Player {
     var name: String?
     var company: String?
     var score: Int
