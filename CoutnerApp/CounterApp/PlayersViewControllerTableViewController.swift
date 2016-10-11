@@ -14,7 +14,7 @@ UINavigationControllerDelegate {
     
     var players:[Player] = playersData
     var isActive: Bool? = false
-    var lastSelectedIndex: NSIndexPath?
+    var lastSelectedIndex: IndexPath?
     let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
@@ -26,18 +26,18 @@ UINavigationControllerDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return players.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("PlayerCell", forIndexPath: indexPath) as! PlayerCell
-        let player = players[indexPath.row] as Player
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath) as! PlayerCell
+        let player = players[(indexPath as NSIndexPath).row] as Player
         
         if let nameLabel = cell.nameLabel {
             nameLabel.text = player.name
@@ -57,49 +57,49 @@ UINavigationControllerDelegate {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        NSLog("You selected cell #\(indexPath.row)!")
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        NSLog("You selected cell #\((indexPath as NSIndexPath).row)!")
         
-        let alertController = UIAlertController(title: "What do you want to do?", message: "",preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "What do you want to do?", message: "",preferredStyle: .alert)
         
-        let takePhoto = UIAlertAction(title: "Take photo", style: .Default){(_) in
+        let takePhoto = UIAlertAction(title: "Take photo", style: .default){(_) in
             self.imagePicker.allowsEditing = true
-            self.imagePicker.sourceType = .Camera
+            self.imagePicker.sourceType = .camera
             self.lastSelectedIndex = indexPath
-            self.presentViewController(self.imagePicker, animated: true, completion: nil)
+            self.present(self.imagePicker, animated: true, completion: nil)
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) {(_) in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {(_) in
         }
         
-        let setActive = UIAlertAction(title:"Set as Active", style: .Default){(_) in
-                let selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
-                selectedCell.contentView.backgroundColor = UIColor.greenColor()
+        let setActive = UIAlertAction(title:"Set as Active", style: .default){(_) in
+                let selectedCell:UITableViewCell = tableView.cellForRow(at: indexPath)!
+                selectedCell.contentView.backgroundColor = UIColor.green
                 self.isActive=true
         }
         
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) == true {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) == true {
             alertController.addAction(takePhoto)} else {
             print ("I don't have a camera.")
         }
         
         alertController.addAction(cancelAction)
         alertController.addAction(setActive)
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     
-    func imagePickerController(picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [String : AnyObject]){
+    func imagePickerController(_ picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [String : Any]){
          print("Picked an image!")
         
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        players[lastSelectedIndex!.row].myImageView = chosenImage
+        players[(lastSelectedIndex! as NSIndexPath).row].myImageView = chosenImage
         
         tableView.reloadData()
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
     
 }

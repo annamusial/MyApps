@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        counter = NSUserDefaults.standardUserDefaults().integerForKey(CounterKey)
+        counter = UserDefaults.standard.integer(forKey: CounterKey)
         lblScore.text = String(counter)
         
     }
@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     
     @IBAction func buttonPressed() {
         counter += 1
-        NSUserDefaults.standardUserDefaults().setInteger(counter, forKey: CounterKey)
+        UserDefaults.standard.set(counter, forKey: CounterKey)
         lblScore.text = String(counter)
     }
     
