@@ -13,11 +13,13 @@ class Player {
     var company: String?
     var score: Int
     var myImageView: UIImage?
+    var isActive: Bool?
     
     init(name: String?, company: String?, score: Int, myImageView: UIImage) {
         self.name = name
         self.company = company
         self.score = score
         self.myImageView = myImageView
+        self.isActive = false
     }
 }

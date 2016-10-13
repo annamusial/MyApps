@@ -13,12 +13,7 @@ class PlayersViewControllerTableViewController: UITableViewController,UIImagePic
 UINavigationControllerDelegate {
     
     var players:[Player] = playersData
-<<<<<<< HEAD
-    var isActive: Bool? = false
     var lastSelectedIndex: IndexPath?
-=======
-    var lastSelectedIndex: NSIndexPath?
->>>>>>> 38967a2713322032af9d7814fadd0769b6974630
     let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
@@ -38,18 +33,14 @@ UINavigationControllerDelegate {
         return players.count
     }
     
-<<<<<<< HEAD
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-=======
-    override func viewDidAppear(animated: Bool) {
+    
+    func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         tableView.reloadData()
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
->>>>>>> 38967a2713322032af9d7814fadd0769b6974630
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath) as! PlayerCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath as IndexPath) as! PlayerCell
         let player = players[(indexPath as NSIndexPath).row] as Player
         
         if let nameLabel = cell.nameLabel {
@@ -68,6 +59,7 @@ UINavigationControllerDelegate {
         }
         
         return cell
+        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -84,43 +76,34 @@ UINavigationControllerDelegate {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {(_) in
         }
         
-<<<<<<< HEAD
         let setActive = UIAlertAction(title:"Set as Active", style: .default){(_) in
+            self.players[indexPath.row].isActive=true
+            if self.players[indexPath.row].isActive==true{
                 let selectedCell:UITableViewCell = tableView.cellForRow(at: indexPath)!
                 selectedCell.contentView.backgroundColor = UIColor.green
-                self.isActive=true
-=======
-        let setActive = UIAlertAction(title:"Set as Active", style: .Default){(_) in
-            let selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
-            selectedCell.contentView.backgroundColor = UIColor.greenColor()
+            }
             let controller = self.navigationController?.tabBarController?.viewControllers?[0] as? ViewController
-            controller?.counter = 0
+            
+            controller?.counter=0
             controller?.player = self.players[indexPath.row]
->>>>>>> 38967a2713322032af9d7814fadd0769b6974630
+           
         }
-        
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) == true {
-            alertController.addAction(takePhoto)} else {
-            print ("I don't have a camera.")
+           if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) == true {
+                alertController.addAction(takePhoto)
+            } else {
+                print ("I don't have a camera.")
+            }
+         
+            alertController.addAction(cancelAction)
+            alertController.addAction(setActive)
+            self.present(alertController, animated: true, completion: nil)
         }
-        
-        alertController.addAction(cancelAction)
-        alertController.addAction(setActive)
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    
-<<<<<<< HEAD
-    func imagePickerController(_ picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [String : Any]){
-         print("Picked an image!")
-=======
+
     func imagePickerController(picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [String : AnyObject]){
-        print("Picked an image!")
->>>>>>> 38967a2713322032af9d7814fadd0769b6974630
         
+        print("Picked an image!")
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         players[(lastSelectedIndex! as NSIndexPath).row].myImageView = chosenImage
-        
         tableView.reloadData()
         dismiss(animated: true, completion: nil)
     }
@@ -128,5 +111,5 @@ UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
+
 }

@@ -23,44 +23,40 @@ class ViewController: UIViewController {
         lblScore.text = String(counter)
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidAppear(_ _animated: Bool) {
+        super.viewDidAppear(_animated)
         self.tabBarController!.delegate = self
     }
     
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
     @IBAction func buttonPressed() {
         counter += 1
-<<<<<<< HEAD
         UserDefaults.standard.set(counter, forKey: CounterKey)
-=======
         player?.score = counter
-        NSUserDefaults.standardUserDefaults().setInteger(counter, forKey: CounterKey)
->>>>>>> 38967a2713322032af9d7814fadd0769b6974630
+        UserDefaults.standard.set(counter, forKey: CounterKey)
         lblScore.text = String(counter)
+        if player?.isActive==true{
+            player?.score=counter
+        }
     }
     
     @IBAction func zerujPressed(){
         counter = 0
         lblScore.text = String(counter)
-        
     }
-
-
+    
 }
 
 extension ViewController: UITabBarControllerDelegate {
-    
-    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         print("SELECTED STH!")
         if let controller = viewController as? ViewController {
-            controller.lblScore.text = String(controller.player?.score ?? 0)
+            controller.lblScore.text = String(controller.player?.score ?? counter)
         } else if let controller = viewController as? PlayersViewControllerTableViewController {
             controller.tableView?.reloadData()
         }
