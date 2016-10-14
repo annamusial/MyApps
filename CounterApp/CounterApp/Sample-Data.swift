@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let playersData = [
+var playersData = [
     Player(name:"Anna Musial", company:"HD",score:0,myImageView:UIImage(named:"Flat-Camera-Icon")!),
     Player(name: "Mikolaj Stys", company: "iOS",score:0,myImageView: UIImage(named:"Flat-Camera-Icon")!),
     ]

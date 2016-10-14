@@ -42,6 +42,7 @@ class ViewController: UIViewController {
         lblScore.text = String(counter)
         if player?.isActive==true{
             player?.score=counter
+            print(player?.score)
         }
     }
     
@@ -59,6 +60,7 @@ extension ViewController: UITabBarControllerDelegate {
             controller.lblScore.text = String(controller.player?.score ?? counter)
         } else if let controller = viewController as? PlayersViewControllerTableViewController {
             controller.tableView?.reloadData()
+            
         }
     }
 }
