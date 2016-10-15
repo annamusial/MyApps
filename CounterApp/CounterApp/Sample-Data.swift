@@ -9,7 +9,12 @@
 import Foundation
 import UIKit
 
-var playersData = [
+//bad class name - dont use special characters like "-"
+
+
+var playersData = [ //global variable is a bad idea in this case
     Player(name:"Anna Musial", company:"HD",score:0,myImageView:UIImage(named:"Flat-Camera-Icon")!),
     Player(name: "Mikolaj Stys", company: "iOS",score:0,myImageView: UIImage(named:"Flat-Camera-Icon")!),
     ]
+//bad formatting - use spaces after ","
+//Why there is a comma after last player? - remove it

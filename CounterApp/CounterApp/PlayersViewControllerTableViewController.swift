@@ -7,12 +7,18 @@
 //
 
 import UIKit
-import MobileCoreServices
+import MobileCoreServices //why do you need this import?
+
+//your task:
+//1. add photo functionality
+//2. fix couter refresh
+//3. fix cell selecting - now you can color more than one to green color
+
 
 class PlayersViewControllerTableViewController: UITableViewController,UIImagePickerControllerDelegate,
-UINavigationControllerDelegate {
+UINavigationControllerDelegate { //doubled ViewController element in name, bad extensions formatting
     
-    var players:[Player] = playersData
+    var players:[Player] = playersData //add space after ":"
     var lastSelectedIndex: IndexPath?
     let imagePicker = UIImagePickerController()
     
@@ -21,7 +27,7 @@ UINavigationControllerDelegate {
         imagePicker.delegate = self
     }
     
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning() { //remove unnecessary override
         super.didReceiveMemoryWarning()
     }
     
@@ -34,15 +40,17 @@ UINavigationControllerDelegate {
     }
     
     
-    func viewDidAppear(animated: Bool) {
+    func viewDidAppear(animated: Bool) { //this was my poor impementation of refreshing after tab bar change 
+      //- try to do it in TabBarControllerDelegate, beacuse currently couter in table is refreshed after onclick
         super.viewDidAppear(animated)
         tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath as IndexPath) as! PlayerCell
-        let player = players[(indexPath as IndexPath).row] as Player
-        
+        let player = players[(indexPath as IndexPath).row] as Player //indexPath as IndexPath - unnecessary cast
+      
+      //why do you setting cell attributes using two ways (didSet in Player cell and code below?)
         if let nameLabel = cell.nameLabel {
             nameLabel.text = player.name
         }
@@ -63,7 +71,7 @@ UINavigationControllerDelegate {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        NSLog("You selected cell #\((indexPath as IndexPath).row)!")
+        NSLog("You selected cell #\((indexPath as IndexPath).row)!") //use print or Log consequentely
         let alertController = UIAlertController(title: "What do you want to do?", message: "",preferredStyle: .alert)
         
         let takePhoto = UIAlertAction(title: "Take photo", style: .default){(_) in
@@ -75,13 +83,14 @@ UINavigationControllerDelegate {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {(_) in
         }
         
-        let setActive = UIAlertAction(title:"Set as Active", style: .default){(_) in
-            
-            self.players[indexPath.row].isActive=true
+        let setActive = UIAlertAction(title:"Set as Active", style: .default){(_) in //space between ) { in all occurences
+            //i think this is ugly formatting - try to remove brackets from "(_)" and move _ in to next line
+          //do it in every occurence
+            self.players[indexPath.row].isActive=true //bad formatting
             let selectedCell:UITableViewCell = tableView.cellForRow(at: indexPath)!
             selectedCell.contentView.backgroundColor = UIColor.green
             let controller = self.navigationController?.tabBarController?.viewControllers?[0] as? ViewController
-            controller?.counter=0
+            controller?.counter=0 //bad formatting
             controller?.player = self.players[indexPath.row]
             
             for player in self.players {
@@ -92,16 +101,19 @@ UINavigationControllerDelegate {
         tableView.reloadData()
 
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) == true {
+          //why do you check the value of Bool in the if statement?
             alertController.addAction(takePhoto)
-            } else {
+            } else {  //this is a catastrophic formatting
                 print ("I don't have a camera.")
             }
             alertController.addAction(cancelAction)
             alertController.addAction(setActive)
-            self.present(alertController, animated: true, completion: nil)
+      //it is very nice that you exported cancelAction and setActive to another variables - much cleaner
+            self.present(alertController, animated: true, completion: nil) //self is unnecessary
         
     }
 
+  //read the warning - signature is very similar to protocol method - ergo thats why you don't get the photo
     func imagePickerController(picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [String : AnyObject]?){
         
         print("Picked an image!")

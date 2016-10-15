@@ -8,40 +8,42 @@
 
 import UIKit
 
+//try to center jacek's head in this view
+
 class ViewController: UIViewController {
     
-    @IBOutlet var lblScore: UILabel!
+    @IBOutlet var lblScore: UILabel! // try not to use something like "lbl" "sb" "sth" and "a"
     let CounterKey = "counter_key"
     var counter = 0
     var player: Player?
     
-    @IBOutlet var lblShow: UILabel!
+    @IBOutlet var lblShow: UILabel! //maybe you should group variables with the same origin
     
     override func viewDidLoad() {
         super.viewDidLoad()
         counter = UserDefaults.standard.integer(forKey: CounterKey)
         lblScore.text = String(counter)
+        tabBarController?.delegate = self //My bad - used "!" and self
     }
-    
-    override func viewDidAppear(_ _animated: Bool) {
-        super.viewDidAppear(_animated)
-        self.tabBarController!.delegate = self
-    }
-    
 
-    override func didReceiveMemoryWarning() {
+    override func viewDidAppear(_ animated: Bool) {
+      super.viewDidAppear(animated)
+
+    }
+  
+    override func didReceiveMemoryWarning() { //empty override - remove
         super.didReceiveMemoryWarning()
     }
     
     
     @IBAction func buttonPressed() {
         counter += 1
-        UserDefaults.standard.set(counter, forKey: CounterKey)
+        UserDefaults.standard.set(counter, forKey: CounterKey) //doubled method call
         player?.score = counter
         UserDefaults.standard.set(counter, forKey: CounterKey)
         lblScore.text = String(counter)
-        if player?.isActive==true{
-            player?.score=counter
+        if player?.isActive==true{ //badly formatted
+            player?.score=counter //badly formatted
             print(player?.score)
         }
     }
@@ -54,17 +56,13 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        print("SELECTED STH!")
-        if let controller = viewController as? ViewController {
-            controller.lblScore.text = String(controller.player?.score ?? counter)
-        } else if let controller = viewController as? PlayersViewControllerTableViewController {
-            controller.tableView?.reloadData()
-            
-        }
+  func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+    print("Selected something!")
+    if let controller = viewController as? ViewController {
+      controller.lblScore.text = String(controller.counter)
+    } else if let controller = viewController as? PlayersViewControllerTableViewController {
+      controller.tableView?.reloadData()
+      
     }
+  }
 }
-
-
-
-

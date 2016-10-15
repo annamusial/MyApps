@@ -17,6 +17,7 @@
 		81D4BA961D7C83B0002989B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81D4BA951D7C83B0002989B4 /* Assets.xcassets */; };
 		81D4BA991D7C83B0002989B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81D4BA971D7C83B0002989B4 /* LaunchScreen.storyboard */; };
 		81D4BAA41D7C83B0002989B4 /* CounterAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D4BAA31D7C83B0002989B4 /* CounterAppTests.swift */; };
+		D0D6906E1DB2943400035E0F /* TabBarControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D6906D1DB2943300035E0F /* TabBarControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		81D4BA9F1D7C83B0002989B4 /* CounterAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CounterAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		81D4BAA31D7C83B0002989B4 /* CounterAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterAppTests.swift; sourceTree = "<group>"; };
 		81D4BAA51D7C83B0002989B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0D6906D1DB2943300035E0F /* TabBarControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarControllerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,16 +87,17 @@
 		81D4BA8D1D7C83B0002989B4 /* CounterApp */ = {
 			isa = PBXGroup;
 			children = (
-				81D458391D9ABDF4003910F9 /* PlayerCell.swift */,
+				81D4BA9A1D7C83B0002989B4 /* Info.plist */,
 				81D4BA8E1D7C83B0002989B4 /* AppDelegate.swift */,
-				81D4BA901D7C83B0002989B4 /* ViewController.swift */,
-				81D4BA921D7C83B0002989B4 /* Main.storyboard */,
-				81C93CB51D93BD890049FFE4 /* Sample-Data.swift */,
 				81C93CB31D93BD150049FFE4 /* Player.swift */,
+				81D458391D9ABDF4003910F9 /* PlayerCell.swift */,
 				81C93CB11D93BC5C0049FFE4 /* PlayersViewControllerTableViewController.swift */,
+				81C93CB51D93BD890049FFE4 /* Sample-Data.swift */,
+				D0D6906D1DB2943300035E0F /* TabBarControllerDelegate.swift */,
+				81D4BA901D7C83B0002989B4 /* ViewController.swift */,
 				81D4BA951D7C83B0002989B4 /* Assets.xcassets */,
 				81D4BA971D7C83B0002989B4 /* LaunchScreen.storyboard */,
-				81D4BA9A1D7C83B0002989B4 /* Info.plist */,
+				81D4BA921D7C83B0002989B4 /* Main.storyboard */,
 			);
 			path = CounterApp;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81D4583A1D9ABDF4003910F9 /* PlayerCell.swift in Sources */,
+				D0D6906E1DB2943400035E0F /* TabBarControllerDelegate.swift in Sources */,
 				81C93CB61D93BD890049FFE4 /* Sample-Data.swift in Sources */,
 				81C93CB41D93BD150049FFE4 /* Player.swift in Sources */,
 				81D4BA911D7C83B0002989B4 /* ViewController.swift in Sources */,
